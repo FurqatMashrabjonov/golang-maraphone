@@ -2,15 +2,25 @@ package main
 
 import (
 	"fmt"
-	"strings"
+	"os"
 )
 
 func main() {
+	dir, err := os.Open(".")
+	if err != nil {
+		return
+	}
 
-	str := "a-b-c-d-f"
-	var arr []string
-	arr = strings.Split(str, "-")
+	defer dir.Close()
 
-	fmt.Println(arr[2:4])
+	files, err := dir.Readdir(-1)
+
+	if err != nil {
+		return
+	}
+
+	for _, file := range files {
+		fmt.Println(file.Name())
+	}
 
 }
