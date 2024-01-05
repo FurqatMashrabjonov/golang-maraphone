@@ -1,26 +1,14 @@
 package main
 
-import (
-	"fmt"
-	"os"
-)
+import "fmt"
+
+type Age int
+
+func (a Age) printValue() {
+	fmt.Println("Value is: ", a)
+}
 
 func main() {
-	dir, err := os.Open(".")
-	if err != nil {
-		return
-	}
-
-	defer dir.Close()
-
-	files, err := dir.Readdir(-1)
-
-	if err != nil {
-		return
-	}
-
-	for _, file := range files {
-		fmt.Println(file.Name())
-	}
-
+	a := Age(23)
+	a.printValue()
 }
